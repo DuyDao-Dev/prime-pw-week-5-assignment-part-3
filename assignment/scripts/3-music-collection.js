@@ -78,12 +78,12 @@ console.log(collection);
 //published in YEAR`.
 function showCollection (albumArray) {
   for (let i = 0; i < albumArray.length; i++) {
-    console.log(`Title: ${albumArray[i].title} Artist: ${albumArray[i].artist} Year: ${albumArray[i].yearPublished}`);
+    console.log(`Title: ${albumArray[i].title}, Artist: ${albumArray[i].artist}, Year: ${albumArray[i].yearPublished}`);
   }
 }
 //
 // - Test the `showCollection` function.
-console.log(showCollection(collection));//Why does it show up as undefined?
+showCollection(collection);//Why does it show up as undefined?
 
 // - Add a function named `findByArtist`. This function should:
 //   - Take in `artist` (a string) parameter
@@ -91,8 +91,17 @@ console.log(showCollection(collection));//Why does it show up as undefined?
 //   - Loop through the `collection` and add any objects with a matching artist to the array.
 //   - Return the array with the matching results. If no results are found, return an empty array.
 function findByArtist (artist){
-
-}
+  let matchingArtist = [];
+  console.log('In find by artist');
+    for (let i = 0; i < collection.length; i++) {
+      if (collection[i].artist === artist) {
+        matchingArtist.push(collection[i]);
+      }//end of if
+    }//end of for loop
+    return matchingArtist;
+  }
+  findByArtist('Joe');
 // - Test the `findByArtist` function. Make sure to test with an artist you know is in the collection, as well as an artist you know is not in your collection. Check that for artists with multiple matches, all are found.
-//
+console.log(findByArtist('Joe'));
+showCollection(findByArtist('Joe'));
 // > When testing your functions, write all tests in the JavaScript file!
