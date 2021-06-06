@@ -40,16 +40,18 @@ let collection = [];
 // console.log(collection);
 
 //Attempt 3
-function addToCollection (title, artist, yearPublished) {
+function addToCollection (title, artist, yearPublished, tracks) {
   let albums = {
     title: title,
     artist: artist,
-    yearPublished: yearPublished
-  }
+    yearPublished: yearPublished,
+    tracks: tracks,
+  }//end albums variable
   collection.push(albums);
 }
 addToCollection('All That I Am', 'Joe', '1997');
 console.log(collection);
+
 //
 // - Test the `addToCollection` function:
 //   - Add 6 albums to your collection. Aim to have a mix of both same
@@ -78,7 +80,7 @@ console.log(collection);
 //published in YEAR`.
 function showCollection (albumArray) {
   for (let i = 0; i < albumArray.length; i++) {
-    console.log(`Title: ${albumArray[i].title}, Artist: ${albumArray[i].artist}, Year: ${albumArray[i].yearPublished}`);
+    console.log(`Title: ${albumArray[i].title}, Artist: ${albumArray[i].artist}, Year: ${albumArray[i].yearPublished}, tracks: ${albumArray[i].tracks}`);
   }
 }
 //
@@ -92,7 +94,7 @@ showCollection(collection);//Why does it show up as undefined?
 //   - Return the array with the matching results. If no results are found, return an empty array.
 function findByArtist (artist){
   let matchingArtist = [];
-  console.log('In find by artist');
+  console.log('Find this artist: ', artist);
     for (let i = 0; i < collection.length; i++) {
       if (collection[i].artist === artist) {
         matchingArtist.push(collection[i]);
@@ -102,6 +104,87 @@ function findByArtist (artist){
   }
   findByArtist('Joe');
 // - Test the `findByArtist` function. Make sure to test with an artist you know is in the collection, as well as an artist you know is not in your collection. Check that for artists with multiple matches, all are found.
+
+console.log(findByArtist('Max'));
 console.log(findByArtist('Joe'));
-showCollection(findByArtist('Joe'));
+
 // > When testing your functions, write all tests in the JavaScript file!
+
+//Stretch Goals
+let searchResults = [];
+function search (findAlbum) {
+  let matchSearch = [];
+  for (let i = 0; i < findAlbum.length; i++) {
+    if (collection[i].findAlbum === findAlbum) {
+      matchSearch.push(collection[i]);
+    }//end if
+  }//end for
+  return matchSearch;
+}
+search('Joe');
+console.log(matchSearch);
+
+
+
+// // Stretch Goals iteration 2
+//
+// // create a function called search
+// function search(){
+//
+// }
+//
+// // Take an input parameter for a search criteria object. Create your solution based on a search object that has these properties:
+// function search(searchObj){
+//
+// }
+//
+// // Requirement 1: Return a new array of all items in the `collection` matching *all* of the search criteria.
+//
+// // If no results are found, return an empty array.
+// function search(searchObj){
+//   var result = [];
+//
+//   //some code
+//
+//   return result;
+// }
+//
+// // If there is no search object or an empty search object provided as input, then return all albums in the `collection`
+// function search(searchObj){
+//   var result = [];
+//
+//   if(searchObj == '') {
+//     //return all albums in the Collection
+//     return collection;
+//
+//   } else {
+//   //some code
+//   }
+//   return result;
+// }
+//
+//
+// // Add an array of `tracks` to your album objects. Each track should have a `name` and `duration`. You will need to update the functions to support this new property:
+//
+// var trackName = {
+//   NAME:DURATION
+// };
+//
+// function search(searchObj, trackName){
+//
+//   var result = [];
+//
+//   if(searchObj == '' && trackName == '') {
+//     //return all albums in the Collection
+//     return collection;
+//
+//   } else {
+//   //some code to search through collections and add to result
+//     for (var i = 0; i < collection.length(); i++) {
+//       if(searchObj == collection[i] || searchObj.tracks == collection[i].tracks){
+//         result.push(collection[i]);
+//       }
+//     }
+//   }
+//   return result;
+// }
