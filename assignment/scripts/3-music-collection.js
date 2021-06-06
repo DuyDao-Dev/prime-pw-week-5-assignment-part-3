@@ -40,13 +40,13 @@ let collection = [];
 // console.log(collection);
 
 //Attempt 3
-function addToCollection (title, artist, yearPublished, tracks) {
-  let albums = {
+function addToCollection (title, artist, yearPublished, tracks, duration) {
+    let albums = {
     title: title,
     artist: artist,
     yearPublished: yearPublished,
-    tracks: tracks,
-  }//end albums variable
+    tracks: tracks, duration
+  };//end albums variable
   collection.push(albums);
 }
 addToCollection('All That I Am', 'Joe', '1997');
@@ -94,15 +94,17 @@ showCollection(collection);//Why does it show up as undefined?
 //   - Return the array with the matching results. If no results are found, return an empty array.
 function findByArtist (artist){
   let matchingArtist = [];
-  console.log('Find this artist: ', artist);
+  console.log('What artist and I currently searching?', artist);
     for (let i = 0; i < collection.length; i++) {
       if (collection[i].artist === artist) {
         matchingArtist.push(collection[i]);
+        console.log('Found this artist: ',matchingArtist);
       }//end of if
     }//end of for loop
     return matchingArtist;
   }
   findByArtist('Joe');
+  findByArtist('Max');
 // - Test the `findByArtist` function. Make sure to test with an artist you know is in the collection, as well as an artist you know is not in your collection. Check that for artists with multiple matches, all are found.
 
 console.log(findByArtist('Max'));
@@ -112,22 +114,23 @@ console.log(findByArtist('Joe'));
 
 //Stretch Goals
 let searchResults = [];
-function search (findAlbum) {
+function search (artistAndYear) {
   let matchSearch = [];
-  for (let i = 0; i < findAlbum.length; i++) {
-    if (collection[i].findAlbum === findAlbum) {
+  for (let i = 0; i < artistAndYear.length; i++) {
+    if (collection[i].artist && collection[i].yearPublished[i] === artistAndYear) {
       matchSearch.push(collection[i]);
+      console.log('Matches are: ', matchSearch);//Need to figure out why it wont show up in console.
     }//end if
   }//end for
   return matchSearch;
 }
-search('Joe');
-console.log(matchSearch);
+search('Joe', 1997);
+
+//Can I or do I need to pull info from ojbects from function on line 43? Maybe not since I can pull from collection. 
 
 
-
-// // Stretch Goals iteration 2
-//
+// // Stretch Goals Attempt 2
+// Trying to break it down line by line.
 // // create a function called search
 // function search(){
 //
