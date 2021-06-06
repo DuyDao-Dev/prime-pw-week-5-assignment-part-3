@@ -40,37 +40,37 @@ let collection = [];
 // console.log(collection);
 
 //Attempt 3
-function addToCollection (title, artist, yearPublished, tracks, duration) {
-    let albums = {
+function addToCollection (title, artist, yearPublished, tracks) {
+    let album = {
     title: title,
     artist: artist,
     yearPublished: yearPublished,
-    tracks: tracks, duration
+    tracks: tracks,
   };//end albums variable
-  collection.push(albums);
+  collection.push(album);
 }
-addToCollection('All That I Am', 'Joe', '1997');
+addToCollection('All That I Am', 'Joe', '1997', [{name: 'track1',duration: '5:00'},{name: 'track2',duration: '6:00'},{name: 'track3',duration: '7:00'},]);
 console.log(collection);
-
 //
+
 // - Test the `addToCollection` function:
 //   - Add 6 albums to your collection. Aim to have a mix of both same
 // and different artists and published years. (Feel free to share your musical interests,
 // or make stuff up. Totally fine either way.)
 //   - Console.log each album as added using the returned value.
 //   - After all are added, console.log the `collection` array.
-addToCollection('My Name is Joe', 'Joe', '2000');
-console.log(collection);
-addToCollection('Better Days', 'Joe', '2001');
-console.log(collection);
-addToCollection('Colleyhighharmony', 'Boyz II Men', '1991');
-console.log(collection);
-addToCollection('CrazySexyCool', 'TLC', '1994');
-console.log(collection);
-addToCollection('112', '112', '1996');
-console.log(collection);
-addToCollection('One In A Million', 'Aaliyah', '1996');
-console.log(collection);
+// addToCollection('My Name is Joe', 'Joe', '2000');
+// console.log(collection);
+// addToCollection('Better Days', 'Joe', '2001');
+// console.log(collection);
+// addToCollection('Colleyhighharmony', 'Boyz II Men', '1991');
+// console.log(collection);
+// addToCollection('CrazySexyCool', 'TLC', '1994');
+// console.log(collection);
+// addToCollection('112', '112', '1996');
+// console.log(collection);
+// addToCollection('One In A Million', 'Aaliyah', '1996');
+// console.log(collection);
 
 // - Add a function named `showCollection`. This function should:
 //   - Take in an array parameter. (This allows it to be reused to show any collection, like the results
@@ -78,14 +78,22 @@ console.log(collection);
 //   - Console.log the number of items in the array.
 //   - Loop over the array and console.log each album's information formatted like: `TITLE by ARTIST,
 //published in YEAR`.
+// function showCollection (albumArray) {
+//   for (let i = 0; i < albumArray.length; i++) {
+//     console.log(`Title: ${albumArray[i].title}, Artist: ${albumArray[i].artist}, Year: ${albumArray[i].yearPublished}, tracks: ${albumArray[i].tracks}`);
+//   }
+// }
 function showCollection (albumArray) {
   for (let i = 0; i < albumArray.length; i++) {
-    console.log(`Title: ${albumArray[i].title}, Artist: ${albumArray[i].artist}, Year: ${albumArray[i].yearPublished}, tracks: ${albumArray[i].tracks}`);
+    console.log(`${albumArray[i].title} by ${albumArray[i].artist}, published in ${albumArray[i].yearPublished}`);
+    for (let j = 0; j < albumArray[i].tracks.length; j++) {
+      console.log(albumArray[i].tracks[j]);
+    }
   }
 }
 //
 // - Test the `showCollection` function.
-showCollection(collection);//Why does it show up as undefined?
+showCollection(collection);
 
 // - Add a function named `findByArtist`. This function should:
 //   - Take in `artist` (a string) parameter
@@ -113,20 +121,36 @@ console.log(findByArtist('Joe'));
 // > When testing your functions, write all tests in the JavaScript file!
 
 //Stretch Goals
-let searchResults = [];
-function search (artistAndYear) {
-  let matchSearch = [];
-  for (let i = 0; i < artistAndYear.length; i++) {
-    if (collection[i].artist && collection[i].yearPublished[i] === artistAndYear) {
-      matchSearch.push(collection[i]);
-      console.log('Matches are: ', matchSearch);//Need to figure out why it wont show up in console.
-    }//end if
-  }//end for
-  return matchSearch;
-}
-search('Joe', 1997);
 
-//Can I or do I need to pull info from ojbects from function on line 43? Maybe not since I can pull from collection. 
+function search (searchObj) {
+  let matchingArtist = [];
+  // console.log('What is my current search?', searchObj);
+    for (let i = 0; i < collection.length; i++) {
+      let matching = true;
+      // console.log(collection[i]);
+      for (let j in searchObj) {//Go through all search criteria.
+        if (collection[i][j] != searchObj[j]) {// != means not equal
+          // console.log('What collection is doing', collection[i][j]);
+          // console.log('What is searchOjb doing', searchObj[j]);
+          matching = false;
+        }
+        // console.log(j + ' : ' + searchObj[j]);
+      }
+      if (matching == true) {
+        matchingArtist.push(collection[i]);
+      }
+      // if (collection[i].artist === searchObj.artist) {
+      //   matchingArtist.push(collection[i]);
+      //   console.log('Found this artist: ',matchingArtist);
+      // }//end of if
+    }//end of for loop
+    console.log(matchingArtist);
+    return matchingArtist;
+}
+// search({artist: 'Ray Charles', yearPublished: '1957'});
+search({artist: 'Joe', yearPublished: '1997'});
+search(); //Tested and it shows up all 7 albums
+//Can I or do I need to pull info from ojbects from function on line 43? Maybe not since I can pull from collection.
 
 
 // // Stretch Goals Attempt 2
